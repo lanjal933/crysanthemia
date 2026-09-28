@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vincular Cuenta de Google</title>
+  <!-- SDK de Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .btn {
+      padding: 12px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .btn-connect {
+      background-color: #4285f4;
+      color: white;
+    }
+    .btn-disconnect {
+      background-color: #d93025;
+      color: white;
+    }
+    .status {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #4285f4;
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Integración con Google</h2>
+    <p>Conecta tus cuentas de Google Calendar, Gmail y Drive para autorizar al agente de IA.</p>
+
+    <!-- Caja de Estado -->
+    <div class="status" id="statusBox">Cargando estado...</div>
+
+    <!-- Vista: Usuario NO conectado -->
+    <div id="disconnectedView" class="hidden">
+      <button class="btn btn-connect" onclick="connectGoogle()">Conectar Cuenta de Google</button>
+    </div>
+
+    <!-- Vista: Usuario CONECTADO -->
+    <div id="connectedView" class="hidden">
+      <p><strong>Usuario:</strong> <span id="userEmail"></span></p>
+      <button class="btn btn-disconnect" onclick="disconnectGoogle()">Desconectar / Cerrar Sesión</button>
+    </div>
+  </div>
+
+  <script>
+    // =======================================================
+    // CONFIGURACIÓN DE SUPABASE
+    // =======================================================
+    const SUPABASE_URL = "https://pazpomltsuerftqgkvmq.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhenBvbWx0c3VlcmZ0cWdrdm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1OTY2MzgsImV4cCI6MjEwMzE3MjYzOH0.m0IQ7GDvLsEpZjwVRTuV7vDfqTpaO-r6WcSV9jCNCdQ";
+
+    // Permisos solicitados para el Agente
+    const GOOGLE_SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/drive.file";
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Inicializar listeners al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthListener();
+    });
+
+    // 1. Iniciar flujo OAuth de Google
+    async function connectGoogle() {
+      updateStatus("Redirigiendo a Google...");
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin + window.location.pathname,
+          scopes: GOOGLE_SCOPES,
+          queryParams: {
+            access_type: 'offline', // Pide el Refresh Token
+            prompt: 'consent'       // Fuerza el consentimiento para asegurar que Google devuelva el Refresh Token
+          }
+        }
+      });
+
+      if (error) {
+        updateStatus("Error de inicio de sesión: " + error.message);
+      }
+    }
+
+    // 2. Escuchar cambios en la sesión de autenticación
+    function initAuthListener() {
+      supabaseClient.auth.onAuthStateChange(async (event, session) => {
+        if (session && session.user) {
+          showView('connected', session.user.email);
+
+          // Si retornamos del login con OAuth, estará presente el provider_refresh_token
+          if (session.provider_refresh_token) {
+            updateStatus("Guardando credenciales en la base de datos...");
+            await saveTokensToDatabase(
+              session.user.id,
+              session.provider_refresh_token,
+              session.provider_token
+            );
+          } else {
+            updateStatus("Conectado. Credenciales activas.");
+          }
+        } else {
+          showView('disconnected');
+          updateStatus("Sin conexión.");
+        }
+      });
+    }
+
+    // 3. Guardar o actualizar tokens en Supabase (upsert)
+    async function saveTokensToDatabase(userId, refreshToken, accessToken) {
+      const { data, error } = await supabaseClient
+        .from('user_google_tokens')
+        .upsert({
+          user_id: userId,
+          refresh_token: refreshToken,
+          access_token: accessToken,
+          scopes: GOOGLE_SCOPES,
+          updated_at: new Date()
+        }, { onConflict: 'user_id' });
+
+      if (error) {
+        console.error("Error al guardar tokens:", error);
+        updateStatus("Error guardando credenciales: " + error.message);
+      } else {
+        updateStatus("¡Cuenta vinculada y Refresh Token guardado con éxito!");
+      }
+    }
+
+    // 4. Desconectar y cerrar sesión
+    async function disconnectGoogle() {
+      updateStatus("Cerrando sesión...");
+      await supabaseClient.auth.signOut();
+      showView('disconnected');
+      updateStatus("Desconectado.");
+    }
+
+    // Funciones auxiliares de UI
+    function showView(state, email = "") {
+      const disconnectedView = document.getElementById('disconnectedView');
+      const connectedView = document.getElementById('connectedView');
+      const userEmail = document.getElementById('userEmail');
+
+      if (state === 'connected') {
+        disconnectedView.classList.add('hidden');
+        connectedView.classList.remove('hidden');
+        userEmail.innerText = email;
+      } else {
+        disconnectedView.classList.remove('hidden');
+        connectedView.classList.add('hidden');
+        userEmail.innerText = "";
+      }
+    }
+
+    function updateStatus(text) {
+      document.getElementById('statusBox').innerText = "Estado: " + text;
+    }
+  </script>
+</body>
+</html>

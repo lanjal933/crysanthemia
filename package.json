@@ -1,0 +1,12 @@
+{
+  "name": "crysantem-frontend",
+  "version": "1.0.0",
+  "description": "Crysantem Frontend - Static Website",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "dev": "echo 'Static site - use local server'"
+  },
+  "keywords": ["static", "html", "css", "javascript"],
+  "author": "Crysantem",
+  "license": "MIT"
+}

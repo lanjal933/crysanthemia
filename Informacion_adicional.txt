@@ -1,0 +1,344 @@
+# CRYSANTEM
+
+## Agentes de IA para atención y automatización
+
+Creamos chatbots con inteligencia artificial para que las empresas puedan atender a sus clientes, responder consultas y automatizar tareas de forma rápida y natural.
+
+Nuestros agentes pueden integrarse en páginas web, Telegram y Discord, y adaptarse a las necesidades de cada negocio.
+
+**Probá una demo**
+**Hablar por WhatsApp**
+
+---
+
+# Probá Crysantem
+
+No hace falta imaginar cómo funcionaría un agente de IA para tu negocio. Podés probar una demostración directamente desde nuestra página.
+
+Elegí un canal y conversá con nuestro agente.
+
+### Chatbot para página web
+
+Un agente integrado directamente en tu sitio web para responder preguntas y asistir a tus visitantes.
+
+**Probar demo**
+
+### Chatbot para Telegram
+
+Atención automatizada directamente desde Telegram.
+
+**Probar demo**
+
+### Chatbot para Discord
+
+Un agente preparado para responder consultas y asistir comunidades dentro de Discord.
+
+**Probar demo**
+
+---
+
+# Un chatbot puede hacer mucho más que responder preguntas
+
+Nuestros agentes pueden adaptarse progresivamente a las necesidades de cada negocio.
+
+Desde responder las preguntas más frecuentes hasta asistir clientes, gestionar citas y ejecutar tareas automáticamente.
+
+La diferencia está en lo que el chatbot puede hacer por tu negocio.
+
+---
+
+# Planes de Crysantem
+
+Todos nuestros planes incluyen la creación y configuración inicial del chatbot.
+
+El precio de compra corresponde a la implementación y configuración inicial del agente. La mensualidad cubre su mantenimiento, funcionamiento y soporte.
+
+---
+
+## 01 — Responde
+
+### $149 USD de implementación
+
+### $29 USD / mes
+
+El punto de partida para empresas que necesitan responder consultas frecuentes de forma automática.
+
+### El chatbot incluye:
+
+* Respuestas a preguntas frecuentes.
+* Información sobre productos y servicios.
+* Horarios de atención.
+* Ubicación y datos de contacto.
+* Información proporcionada por la empresa.
+* Conversaciones naturales mediante inteligencia artificial.
+* Atención disponible las 24 horas.
+* Integración con página web, Telegram o Discord.
+
+### Ideal para:
+
+Empresas que reciben muchas preguntas repetitivas y quieren ofrecer una respuesta rápida sin tener que responder manualmente cada consulta.
+
+---
+
+# 02 — Asiste
+
+### $299 USD de implementación
+
+### $49 USD / mes
+
+Un chatbot que no solamente responde preguntas, sino que puede comprender mejor lo que necesita cada cliente y guiarlo durante la conversación.
+
+### Incluye todo lo del plan Responde, además de:
+
+* Comprensión de la intención del cliente.
+* Respuestas personalizadas según el contexto.
+* Recomendaciones de productos o servicios.
+* Guía paso a paso para clientes.
+* Recopilación de datos proporcionados por el cliente.
+* Identificación de consultas que requieren atención humana.
+* Derivación de conversaciones a una persona.
+* Manejo de conversaciones más extensas.
+* Base de conocimiento personalizada para el negocio.
+
+### Ideal para:
+
+Empresas que quieren que su chatbot funcione como un asistente virtual y no simplemente como una sección de preguntas frecuentes.
+
+---
+
+# 03 — Automatiza
+
+### $499 USD de implementación
+
+### $79 USD / mes
+
+Un chatbot capaz de conectarse con procesos del negocio y convertir una conversación en una acción.
+
+### Incluye todo lo del plan Asiste, además de:
+
+* Gestión de solicitudes de clientes.
+* Reserva y gestión de citas.
+* Integración con calendarios.
+* Confirmación de citas.
+* Recordatorios automáticos.
+* Captura y clasificación de clientes potenciales.
+* Envío automático de información.
+* Ejecución de acciones mediante automatizaciones.
+* Integración con herramientas externas seleccionadas.
+* Flujos personalizados para diferentes tipos de clientes.
+
+### Ejemplo:
+
+Un cliente puede escribir:
+
+> "Quiero reservar un turno para el jueves por la tarde."
+
+El agente puede identificar la solicitud, consultar la disponibilidad y gestionar el proceso correspondiente.
+
+### Ideal para:
+
+Empresas que quieren utilizar el chatbot para reducir tareas manuales y automatizar parte de su atención al cliente.
+
+---
+
+# 04 — Crysantem Intelligence
+
+### $899 USD de implementación
+
+### $129 USD / mes
+
+Nuestro plan más completo.
+
+Un agente de IA diseñado alrededor de los procesos, información y necesidades específicas de cada negocio.
+
+### Incluye todo lo del plan Automatiza, además de:
+
+* Flujos de conversación avanzados.
+* Gestión avanzada de citas.
+* Resúmenes automáticos de conversaciones.
+* Envío de resúmenes por email.
+* Envío de imágenes.
+* Envío de documentos e información relevante.
+* Acceso a información técnica y específica del negocio.
+* Catálogos y bases de conocimiento avanzadas.
+* Procesamiento de solicitudes más complejas.
+* Automatizaciones personalizadas.
+* Integraciones adicionales según las necesidades del proyecto.
+* Diseño de un agente adaptado al funcionamiento del negocio.
+
+### Ideal para:
+
+Empresas que necesitan un agente de IA más avanzado y personalizado, capaz de formar parte de procesos reales del negocio.
+
+**Solicitar propuesta**
+
+---
+
+# ¿Cuál elegir?
+
+### Responde
+
+Para responder preguntas frecuentes.
+
+### Asiste
+
+Para atender y guiar clientes.
+
+### Automatiza
+
+Para convertir conversaciones en acciones.
+
+### Crysantem Intelligence
+
+Para crear un agente adaptado a procesos específicos del negocio.
+
+---
+
+# No es un chatbot genérico
+
+Cada empresa tiene información, clientes y procesos diferentes.
+
+Por eso nuestros agentes se configuran utilizando la información proporcionada por cada negocio y se adaptan a las necesidades específicas del proyecto.
+
+El objetivo no es simplemente colocar un chatbot en una página.
+
+El objetivo es crear un agente que sea realmente útil para los clientes y para el negocio.
+
+---
+
+# Una conversación puede convertirse en una acción
+
+Nuestros chatbots pueden conectarse con diferentes herramientas y automatizaciones.
+
+Un cliente puede realizar una consulta y, dependiendo del proyecto, el agente puede desencadenar acciones como gestionar una solicitud, consultar información, reservar una cita o enviar información.
+
+La conversación es solamente el comienzo.
+
+---
+
+# ¿Dónde puede funcionar tu agente?
+
+## Página web
+
+Integrá un chatbot directamente en tu sitio web para atender visitantes y clientes.
+
+## Telegram
+
+Atendé consultas directamente desde Telegram.
+
+## Discord
+
+Creá un agente capaz de asistir a los miembros de tu comunidad.
+
+---
+
+# ¿Qué hacemos?
+
+En Crysantem desarrollamos agentes de inteligencia artificial enfocados principalmente en atención al cliente y automatización.
+
+Creamos soluciones que permiten a las empresas responder consultas, asistir clientes y automatizar tareas mediante conversaciones naturales.
+
+Buscamos que la tecnología sea sencilla de utilizar para el cliente, incluso cuando detrás exista un sistema de automatización mucho más complejo.
+
+---
+
+# Preguntas frecuentes
+
+## ¿Necesito conocimientos técnicos?
+
+No. Nosotros nos encargamos de la configuración e implementación del chatbot.
+
+## ¿Dónde puedo utilizar mi chatbot?
+
+Actualmente podemos implementar agentes para páginas web, Telegram y Discord.
+
+## ¿El chatbot puede responder preguntas sobre mi negocio?
+
+Sí. El agente puede configurarse utilizando la información que proporcione la empresa.
+
+## ¿Puede reservar citas?
+
+Sí. Los planes que incluyen automatizaciones pueden configurarse para gestionar procesos de reserva y calendarios compatibles.
+
+## ¿Puede enviar emails?
+
+Los planes avanzados pueden utilizar automatizaciones para enviar información y resúmenes por email.
+
+## ¿Puede enviar imágenes o documentos?
+
+Los agentes de los planes avanzados pueden configurarse para enviar determinados archivos, imágenes o información según las necesidades del proyecto.
+
+## ¿Qué ocurre si el chatbot no sabe responder?
+
+El comportamiento puede configurarse para reconocer cuándo una consulta requiere intervención humana y derivarla a una persona.
+
+## ¿Puedo personalizar el chatbot?
+
+Sí. El comportamiento, conocimiento, instrucciones y flujos del agente pueden adaptarse a cada negocio.
+
+## ¿La mensualidad incluye la implementación?
+
+No. La implementación inicial se cobra una sola vez y la mensualidad corresponde al mantenimiento, funcionamiento y soporte del servicio.
+
+## ¿Puedo contratar una solución personalizada?
+
+Sí. Si las necesidades del proyecto superan las características de nuestros planes, podemos diseñar una solución personalizada.
+
+---
+
+# ¿Querés implementar un agente de IA?
+
+Contanos qué necesitás y analizaremos qué tipo de chatbot puede adaptarse mejor a tu negocio.
+
+## Contacto por WhatsApp
+
+¿Preferís hablar directamente?
+
+**Hablar por WhatsApp**
+
+## Solicitud
+
+### Nombre
+
+Ingresá tu nombre.
+
+### Empresa
+
+Ingresá el nombre de tu empresa.
+
+### Email
+
+Ingresá un email de contacto.
+
+### ¿Qué necesitás automatizar?
+
+Contanos brevemente qué problema querés resolver.
+
+### ¿Dónde querés utilizar tu chatbot?
+
+* Página web
+* Telegram
+* Discord
+* No estoy seguro
+
+**Enviar solicitud**
+
+---
+
+# Crysantem
+
+Agentes de IA para atención y automatización.
+
+Creamos chatbots capaces de responder, asistir y automatizar procesos para empresas.
+
+**Demos**
+**Planes**
+**Quiénes somos**
+**Preguntas frecuentes**
+**Contacto**
+
+**WhatsApp**
+**Telegram**
+**Discord**
+
+© 2026 Crysantem. Todos los derechos reservados.

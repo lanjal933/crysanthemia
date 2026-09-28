@@ -1,0 +1,13 @@
+{
+  "type": "static",
+  "framework": "html",
+  "build": {
+    "command": "echo 'Static site - no build needed'",
+    "output": "."
+  },
+  "env": {
+    "production": {
+      "type": "static"
+    }
+  }
+}

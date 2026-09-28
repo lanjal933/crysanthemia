@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crysantem - Agentes de IA para atención y automatización</title>
+    <meta name="description" content="Creamos agentes de IA capaces de responder consultas, asistir clientes y automatizar tareas directamente desde tu web, Discord o Telegram.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/IMG/New_Logo_White.png" alt="Crysantem" class="logo-image">
+                <span class="logo-text">Crysantem-IA</span>
+            </div>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="#demo" class="navbar-link">Demos</a>
+                <a href="#planes" class="navbar-link">Planes</a>
+                <a href="#portfolio" class="navbar-link">Portfolio</a>
+                <a href="#nosotros" class="navbar-link">Nosotros</a>
+                <a href="#faq" class="navbar-link">FAQ</a>
+                <a href="#contacto" class="navbar-link">Contacto</a>
+            </div>
+            <div class="navbar-menu-overlay" id="navbarMenuOverlay"></div>
+            <div class="navbar-actions">
+                <div class="account-menu-container">
+                    <button id="accountMenuButton" class="btn btn-google-auth">
+                        <svg class="google-logo" width="20" height="20" viewBox="0 0 24 24">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <span id="accountButtonText">Conectar mi cuenta de Google</span>
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div id="accountDropdown" class="account-dropdown hidden">
+                        <div class="account-info">
+                            <span id="accountEmail" class="account-email">No conectado</span>
+                        </div>
+                        <div class="account-actions">
+                            <button id="disconnectGoogleBtn" class="account-action-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                <span>Desconectar Google</span>
+                            </button>
+                            <button id="signOutBtn" class="account-action-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                                </svg>
+                                <span>Cerrar sesión</span>
+                            </button>
+                            <button id="forceLogoutBtn" class="account-action-btn" style="background-color: #ff6464; color: white;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                <span>🔄 Forzar Logout (Refresh Token)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#demo" class="btn btn-primary">Probar demo</a>
+                <button class="navbar-toggle" id="navbarToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title fade-in">Atención al cliente que no necesita descanso.</h1>
+                <p class="hero-subtitle fade-in">Creamos agentes de IA capaces de responder consultas, asistir clientes y automatizar tareas directamente desde tu web, Discord o Telegram.</p>
+                <div class="hero-buttons fade-in">
+                    <a href="#demo" class="btn btn-primary btn-large">Probar demo</a>
+                    <a href="#contacto" class="btn btn-secondary btn-large">Hablar por WhatsApp</a>
+                </div>
+            </div>
+            <div class="hero-visual fade-in">
+                <div class="chatbot-preview">
+                    <div class="chatbot-header">
+                        <span class="chatbot-name">Crysantem AI</span>
+                        <span class="chatbot-status">
+                            <span class="status-dot"></span>
+                            Online
+                        </span>
+                    </div>
+                    <div class="chatbot-messages">
+                        <div class="message message-bot">
+                            <span class="message-text">Hola 👋</span>
+                            <span class="message-text">Soy el asistente de Crysantem.</span>
+                            <span class="message-text">¿En qué puedo ayudarte?</span>
+                        </div>
+                        <div class="message message-user">
+                            <span class="message-text">¿Cuánto cuesta un chatbot?</span>
+                        </div>
+                        <div class="message message-bot typing">
+                            <span class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll fade-in">
+            <span>Probálo →</span>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
+        <div class="container">
+            <h2 class="section-title fade-in">Probá Crysantem</h2>
+            <p class="section-subtitle fade-in">No hace falta imaginar cómo funcionaría un agente de IA para tu negocio. Probalo directamente.</p>
+            <div class="chatbot-container fade-in">
+                <div class="chatbot-interface" id="chatbotInterface">
+                    <div class="chatbot-header">
+                        <span class="chatbot-name">Crysantem AI</span>
+                        <span class="chatbot-status">
+                            <span class="status-dot"></span>
+                            Online
+                        </span>
+                    </div>
+                    <div class="chatbot-messages" id="chatbotMessages">
+                        <div class="message message-bot">
+                            <div class="message-content">
+                                <p class="message-paragraph">Hola 👋</p>
+                                <p class="message-paragraph">Soy el asistente de Crysantem.</p>
+                                <p class="message-paragraph">¿En qué puedo ayudarte?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chatbot-input">
+                        <textarea id="chatbotInput" placeholder="Escribí tu mensaje... (Shift+Enter para nueva línea)" autocomplete="off" rows="1"></textarea>
+                        <button class="btn-send" id="chatbotSend">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Channels Section -->
+    <section class="channels" id="channels">
+        <div class="container">
+            <h2 class="section-title fade-in">Un agente. Diferentes canales.</h2>
+            <div class="channels-grid">
+                <div class="channel-card fade-in">
+                    <div class="channel-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3>Web</h3>
+                    <p>Integrado directamente en tu página.</p>
+                    <div class="channel-badge available">Disponible</div>
+                    <a href="#demo" class="btn btn-primary">Probar demo</a>
+                </div>
+                <div class="channel-card fade-in">
+                    <div class="channel-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Atendé consultas directamente desde Telegram.</p>
+                    <div class="channel-badge coming-soon">Próximamente</div>
+                    <button class="btn btn-secondary" disabled>Próximamente</button>
+                </div>
+                <div class="channel-card fade-in">
+                    <div class="channel-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>Discord</h3>
+                    <p>Asistí a tu comunidad directamente desde Discord.</p>
+                    <div class="channel-badge coming-soon">Próximamente</div>
+                    <button class="btn btn-secondary" disabled>Próximamente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="plans" id="planes">
+        <div class="container">
+            <h2 class="section-title fade-in">Elegí cuánto querés que haga tu agente.</h2>
+            <div class="plans-grid">
+                <!-- Plan 01 -->
+                <div class="plan-card fade-in">
+                    <div class="plan-number">01</div>
+                    <h3>Responde</h3>
+                    <div class="plan-pricing">
+                        <span class="plan-implementation">$75 USD</span>
+                        <span class="plan-period">Implementación</span>
+                        <span class="plan-monthly">$15 USD / mes</span>
+                    </div>
+                    <p class="plan-description">Chatbot básico para automatizar la atención al cliente 24/7.</p>
+                    <div class="plan-channels">
+                        <span class="plan-channel-label">Canales:</span>
+                        <span class="plan-channel-value">Web, Telegram o Discord</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Responde preguntas frecuentes, horarios, ubicación y datos de contacto</li>
+                        <li>Mantiene conversaciones naturales usando la información de tu empresa</li>
+                    </ul>
+                    <div class="plan-tokens">
+                        <span class="plan-token-label">Tokens:</span>
+                        <span class="plan-token-value">2,000 tokens</span>
+                    </div>
+                    <a href="#contacto" class="btn btn-primary">Comenzar</a>
+                </div>
+
+                <!-- Plan 02 -->
+                <div class="plan-card fade-in">
+                    <div class="plan-number">02</div>
+                    <h3>Asiste</h3>
+                    <div class="plan-pricing">
+                        <span class="plan-implementation">$150 USD</span>
+                        <span class="plan-period">Implementación</span>
+                        <span class="plan-monthly">$25 USD / mes</span>
+                    </div>
+                    <p class="plan-description">Asistente inteligente que entiende el contexto y guía al cliente.</p>
+                    <div class="plan-channels">
+                        <span class="plan-channel-label">Conexión clave:</span>
+                        <span class="plan-channel-value">Google Drive (Base de conocimiento personalizada)</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Todo lo del plan anterior</li>
+                        <li>Comprende la intención del usuario y da recomendaciones personalizadas</li>
+                        <li>Recopila datos de clientes y los guía paso a paso</li>
+                        <li>Detecta cuándo se necesita un humano y deriva la conversación</li>
+                        <li>Puede enviar imágenes para mostrar productos o información visual</li>
+                    </ul>
+                    <div class="plan-tokens">
+                        <span class="plan-token-label">Tokens:</span>
+                        <span class="plan-token-value">2,500 tokens</span>
+                    </div>
+                    <a href="#contacto" class="btn btn-primary">Comenzar</a>
+                </div>
+
+                <!-- Plan 03 -->
+                <div class="plan-card fade-in">
+                    <div class="plan-number">03</div>
+                    <h3>Automatiza</h3>
+                    <div class="plan-pricing">
+                        <span class="plan-implementation">$250 USD</span>
+                        <span class="plan-period">Implementación</span>
+                        <span class="plan-monthly">$40 USD / mes</span>
+                    </div>
+                    <p class="plan-description">Agente operativo que transforma conversaciones en acciones comerciales.</p>
+                    <div class="plan-channels">
+                        <span class="plan-channel-label">Conexión clave:</span>
+                        <span class="plan-channel-value">Google Calendar (Integración total de agenda)</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Todo lo del plan anterior</li>
+                        <li>Reserva, gestiona y cancela citas de forma automática</li>
+                        <li>Envía confirmaciones y recordatorios a los clientes</li>
+                        <li>Captura, clasifica y califica leads (clientes potenciales)</li>
+                        <li>Ejecuta flujos automatizados con herramientas externas</li>
+                    </ul>
+                    <div class="plan-tokens">
+                        <span class="plan-token-label">Tokens:</span>
+                        <span class="plan-token-value">3,000 tokens</span>
+                    </div>
+                    <a href="#contacto" class="btn btn-primary">Comenzar</a>
+                </div>
+
+                <!-- Plan 04 -->
+                <div class="plan-card plan-premium fade-in">
+                    <div class="plan-number">04</div>
+                    <h3>Crysantem Intelligence</h3>
+                    <div class="plan-pricing">
+                        <span class="plan-implementation">$450 USD</span>
+                        <span class="plan-period">Implementación</span>
+                        <span class="plan-monthly">$65 USD / mes</span>
+                    </div>
+                    <p class="plan-description">Agente de IA avanzado hecho a la medida exacta de tu negocio.</p>
+                    <div class="plan-channels">
+                        <span class="plan-channel-label">Conexión clave:</span>
+                        <span class="plan-channel-value">Gmail, Google Drive y Google Calendar (Ecosistema completo)</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Todo lo del plan anterior</li>
+                        <li>Envía resúmenes automáticos de las conversaciones por email</li>
+                        <li>Envía y procesa imágenes, catálogos y documentos técnicos complejos</li>
+                        <li>Ejecuta automatizaciones personalizadas e integraciones adicionales a pedido</li>
+                        <li>Diseñado desde cero para adaptarse a los procesos específicos de tu empresa</li>
+                    </ul>
+                    <div class="plan-tokens">
+                        <span class="plan-token-label">Tokens:</span>
+                        <span class="plan-token-value">4,000 tokens</span>
+                    </div>
+                    <a href="#contacto" class="btn btn-primary">Comenzar</a>
+                </div>
+            </div>
+            <div class="plans-disclaimer fade-in">
+                <p>La implementación inicial se cobra una sola vez. La mensualidad corresponde al mantenimiento, funcionamiento y soporte del servicio.</p>
+                <p>La mensualidad incluye un volumen de uso razonable para el funcionamiento habitual del servicio. Proyectos con un volumen excepcional de conversaciones pueden requerir una cotización adicional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compras Adicionales Section -->
+    <section class="compras-adicionales" id="compras-adicionales">
+        <div class="container">
+            <h2 class="section-title fade-in">Compras Adicionales</h2>
+            <p class="section-subtitle fade-in">Servicios complementarios para potenciar tu agente de IA.</p>
+            
+            <div class="compras-adicionales-intro fade-in">
+                <p>Estos son añadidos para tu agente IA, por un costo adicional tu agente puede generar con mayor libertad de herramientas externas en base a los planes base (Cada compra es un complemento a los planes originales), Por la compra de dos o más damos una rebaja del 25% en el precio total de compra de Complementos Adicionales.</p>
+            </div>
+            
+            <div class="compras-adicionales-grid fade-in">
+                <!-- Texto Bonito Card -->
+                <div class="compra-card texto-bonito-card">
+                    <div class="compra-card-header">
+                        <h3>Texto Bonito</h3>
+                        <span class="compra-price">$7 USD</span>
+                    </div>
+                    <p class="compra-description">Markdown amplio con formato enriquecido, cajas coloridas, links estéticos y botones directos a WhatsApp y Gmail.</p>
+                    <button class="btn btn-primary" onclick="openModal('textoBonitoModal')">Ver detalles</button>
+                    <button class="btn btn-secondary demo-btn">Mira esto desde nuestro agente</button>
+                </div>
+                
+                <!-- Graficos Pro Card -->
+                <div class="compra-card graficos-pro-card">
+                    <div class="compra-card-header">
+                        <h3>Graficos Pro</h3>
+                        <span class="compra-price">$10 USD</span>
+                    </div>
+                    <p class="compra-description">Muestra gráficos a tus clientes para mostrarles tu trabajo en situaciones específicas. La IA podrá generar gráficos.</p>
+                    <button class="btn btn-primary" onclick="openModal('graficosProModal')">Ver detalles</button>
+                    <button class="btn btn-secondary demo-btn">Mira esto desde nuestro agente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title fade-in">Nuestro Portfolio</h2>
+            <p class="section-subtitle fade-in">Estamos construyendo nuestra trayectoria y te invitamos a ser parte de ella.</p>
+            
+            <div class="portfolio-content fade-in">
+                <div class="portfolio-status">
+                    <div class="status-badge">
+                        <span class="status-icon">🚧</span>
+                        <span class="status-text">En fase de creación</span>
+                    </div>
+                    <p class="portfolio-description">
+                        Por el momento, no contamos con casos de éxito publicados de clientes. Estamos en la etapa de construcción de nuestro portfolio y nos enfocamos en entregar resultados de calidad que pronto podrán ver aquí.
+                    </p>
+                </div>
+                
+                <div class="portfolio-offer">
+                    <h3 class="offer-title">Descuento especial para primeros clientes</h3>
+                    <div class="offer-card">
+                        <div class="offer-highlight">
+                            <span class="offer-discount">50% OFF</span>
+                            <span class="offer-label">en pago inicial</span>
+                        </div>
+                        <p class="offer-description">
+                            Para quienes quieran brindarnos su confianza al adquirir un servicio, el pago inicial se reduce en un <strong>50%</strong> para cualquier compra inicial.
+                        </p>
+                        <div class="offer-extra">
+                            <span class="offer-icon">🎁</span>
+                            <span class="offer-text">Adicionalmente, si la mensualidad supera los $35 USD, aplicamos un <strong>10% de descuento por un año</strong>.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <h2 class="section-title fade-in">Construimos herramientas de IA para negocios reales.</h2>
+            <p class="section-subtitle fade-in">En Crysantem desarrollamos agentes de inteligencia artificial enfocados principalmente en atención al cliente y automatización.</p>
+            <p class="section-subtitle fade-in">Nuestro objetivo es simple: que las empresas puedan ofrecer una mejor atención sin convertir cada consulta en trabajo manual.</p>
+            <div class="about-values">
+                <div class="about-value fade-in">
+                    <h3>Simple</h3>
+                    <p>Tecnología compleja detrás. Experiencia sencilla delante.</p>
+                </div>
+                <div class="about-value fade-in">
+                    <h3>Útil</h3>
+                    <p>No hacemos IA por hacer IA. Cada función debe resolver un problema.</p>
+                </div>
+                <div class="about-value fade-in">
+                    <h3>Adaptable</h3>
+                    <p>Cada negocio tiene procesos diferentes. El agente debe adaptarse a ellos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title fade-in">Preguntas Frecuentes</h2>
+            <div class="faq-list">
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Necesito conocimientos técnicos?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. Nosotros nos encargamos de la configuración e implementación del chatbot.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Dónde puedo utilizar mi chatbot?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Actualmente podemos implementar agentes para páginas web, Telegram y Discord.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿El chatbot puede responder preguntas sobre mi negocio?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí. El agente puede configurarse utilizando la información que proporcione la empresa.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Puede reservar citas?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí. Los planes que incluyen automatizaciones pueden configurarse para gestionar procesos de reserva y calendarios compatibles.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Puede enviar emails?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Los planes avanzados pueden utilizar automatizaciones para enviar información y resúmenes por email.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Puede enviar imágenes o documentos?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Los agentes de los planes avanzados pueden configurarse para enviar determinados archivos, imágenes o información según las necesidades del proyecto.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Qué ocurre si el chatbot no sabe responder?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>El comportamiento puede configurarse para reconocer cuándo una consulta requiere intervención humana y derivarla a una persona.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Puedo personalizar el chatbot?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí. El comportamiento, conocimiento, instrucciones y flujos del agente pueden adaptarse a cada negocio.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿La mensualidad incluye la implementación?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. La implementación inicial se cobra una sola vez y la mensualidad corresponde al mantenimiento, funcionamiento y soporte del servicio.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>¿Puedo contratar una solución personalizada?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí. Si las necesidades del proyecto superan las características de nuestros planes, podemos diseñar una solución personalizada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title fade-in">¿Querés implementar un agente de IA?</h2>
+            <p class="section-subtitle fade-in">Contanos qué necesitás y analizaremos qué tipo de chatbot puede adaptarse mejor a tu negocio.</p>
+            <div class="contact-container">
+                <div class="contact-whatsapp fade-in">
+                    <h3>WhatsApp</h3>
+                    <p>Hablemos directamente sobre lo que necesitás automatizar.</p>
+                    <a href="#" class="btn btn-primary btn-whatsapp" id="whatsappButton">Hablar por WhatsApp</a>
+                </div>
+                <div class="contact-schedule fade-in">
+                    <h3>Agendar Sesión</h3>
+                    <p>Reserva una sesión con el desarrollador para discutir tu proyecto.</p>
+                    <button class="btn btn-primary btn-schedule" id="scheduleButton">Agendar Sesión con IA</button>
+                </div>
+                <div class="contact-gmail fade-in">
+                    <h3>Gmail</h3>
+                    <p>Envíanos un correo directamente para consultas detalladas.</p>
+                    <a href="mailto:benjaminroccoherrera@gmail.com" class="btn btn-primary btn-gmail">Contactar por Gmail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Crysantem</h3>
+                    <p>Agentes de IA para atención y automatización.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Links</h4>
+                        <a href="#demo">Demos</a>
+                        <a href="#planes">Planes</a>
+                        <a href="#portfolio">Portfolio</a>
+                        <a href="#nosotros">Nosotros</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contacto">Contacto</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Canales</h4>
+                        <a href="#" class="footer-link">WhatsApp</a>
+                        <a href="#" class="footer-link">Telegram</a>
+                        <a href="#" class="footer-link">Discord</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <button class="footer-link" onclick="showTerms()">Términos y Condiciones</button>
+                        <button class="footer-link" onclick="showPrivacy()">Política de Privacidad</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> 2026 Crysantem. Todos los derechos reservados.</p>
+                <div class="hidden-access">
+                    <button class="hidden-btn" onclick="showTerms()" title="Términos y Condiciones">Términos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Consent Modal -->
+    <div id="loginConsentModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>Iniciar Sesión</h2>
+                <button class="modal-close" onclick="closeLoginConsent()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="consent-content">
+                    <p style="text-align: center; margin-bottom: 20px;">
+                        Al iniciar sesión en <strong>Crysantem IA</strong>, aceptas nuestros términos y condiciones y políticas de privacidad.
+                    </p>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <a href="/terminos.html" target="_blank" style="color: #00ff88; text-decoration: underline;">Ver Términos y Condiciones</a>
+                    </div>
+                    <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        <p style="margin: 0; font-size: 14px; color: var(--text-secondary);">
+                            💡 Si solo estás viendo la página no es necesario que nos des tus permisos de Gmail, Calendar o Drive. Puedes ponerlos otro día si decides trabajar con nosotros.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeLoginConsent()">Cancelar</button>
+                <button class="btn btn-primary" onclick="acceptLoginConsent()">Conectar ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Notification -->
+    <div id="authNotification" class="auth-notification"></div>
+
+    <!-- Terms and Conditions Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Términos y Condiciones de Crysantem</h2>
+                <button class="modal-close" onclick="closeTerms()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="terms-content">
+                    <h2 class="terms-title">1. Identidad, objeto, definiciones y aceptación</h2>
+                    <p class="terms-meta">Última actualización: 20/09/2026 | Versión: 1.0</p>
+                    
+                    <h3>1.1. Identificación</h3>
+                    <p>Los presentes Términos y Condiciones regulan el acceso, contratación y utilización de los servicios ofrecidos por Crysantem (en adelante, "Crysantem", "la Empresa" o "el Servicio"), una empresa dedicada al desarrollo, implementación, configuración y comercialización de agentes de inteligencia artificial y soluciones de automatización orientadas principalmente a la atención y gestión de clientes.</p>
+                    
+                    <h3>1.2. Objeto</h3>
+                    <p>Estos Términos y Condiciones establecen las reglas aplicables a la contratación y utilización de los servicios de Crysantem, incluyendo los derechos y responsabilidades de Crysantem y de las personas o entidades que contraten o utilicen sus servicios.</p>
+                    <p>Crysantem ofrece soluciones basadas en inteligencia artificial que pueden incluir, según el servicio contratado, chatbots y agentes capaces de responder consultas, proporcionar información sobre productos o servicios, interactuar con clientes, procesar información proporcionada por el cliente, gestionar determinadas tareas y ejecutar automatizaciones.</p>
+                    <p>Algunas funcionalidades pueden requerir la conexión con servicios externos y plataformas de terceros mediante mecanismos de autorización como OAuth 2.0. Entre estos servicios pueden encontrarse, según el agente contratado, herramientas de Google como Google Calendar, Gmail y Google Docs.</p>
+                    
+                    <h3>1.3. Definiciones</h3>
+                    <p>A los efectos de estos Términos:</p>
+                    <ul>
+                        <li><strong>"Agente IA"</strong> significa el sistema de inteligencia artificial configurado por Crysantem para realizar determinadas funciones de forma automatizada de acuerdo con las características del servicio contratado.</li>
+                        <li><strong>"Cliente"</strong> significa la persona física o jurídica que contrata los servicios de Crysantem.</li>
+                        <li><strong>"Usuario"</strong> significa cualquier persona que interactúe con un Agente IA proporcionado por Crysantem, ya sea como cliente, visitante, empleado, colaborador o usuario final del Cliente.</li>
+                        <li><strong>"Integración"</strong> significa cualquier conexión entre un Agente IA y un servicio, plataforma, aplicación o sistema externo autorizado por el Cliente.</li>
+                        <li><strong>"Servicios de terceros"</strong> significa las plataformas, aplicaciones, APIs o servicios que no son operados directamente por Crysantem, incluyendo, entre otros, servicios de Google.</li>
+                        <li><strong>"Contenido del Cliente"</strong> significa la información, documentos, imágenes, archivos, instrucciones, configuraciones y demás materiales proporcionados por el Cliente para la configuración o funcionamiento de sus servicios.</li>
+                    </ul>
+                    
+                    <h3>1.4. Aceptación de los Términos</h3>
+                    <p>El acceso, contratación o utilización de los servicios de Crysantem implica la aceptación de estos Términos y Condiciones.</p>
+                    <p>Cuando una persona contrata un servicio en representación de una empresa u otra organización, declara contar con las facultades necesarias para aceptar estos Términos en su nombre.</p>
+                    <p>Si el Cliente no está de acuerdo con estos Términos, deberá abstenerse de contratar o utilizar los servicios de Crysantem.</p>
+                    
+                    <h3>1.5. Relación con la Política de Privacidad</h3>
+                    <p>El tratamiento de datos personales y de la información obtenida mediante integraciones con servicios de terceros se encuentra regulado adicionalmente por la Política de Privacidad de Crysantem, que forma parte del marco contractual aplicable al uso del Servicio.</p>
+                    <p>En caso de que una disposición relativa al tratamiento de datos personales deba interpretarse conjuntamente con la Política de Privacidad, ambas deberán considerarse de manera complementaria.</p>
+                    
+                    <h2 class="terms-title">2. Servicio, cuentas y funcionamiento</h2>
+                    
+                    <h3>2.1. Uso de cuentas y autorizaciones</h3>
+                    <p>Las cuentas, credenciales, autorizaciones e integraciones utilizadas en relación con los servicios de Crysantem tendrán como finalidad exclusiva permitir el desarrollo, configuración, funcionamiento y mantenimiento del producto contratado, así como la ejecución de las automatizaciones acordadas con el Cliente.</p>
+                    <p>Cuando el funcionamiento de un Agente IA requiera acceder a servicios externos, Crysantem podrá utilizar las autorizaciones otorgadas por el Cliente exclusivamente para las funciones previamente acordadas.</p>
+                    <p>Crysantem no utilizará las cuentas conectadas para fines ajenos a la prestación del servicio contratado.</p>
+                    <p>Las autorizaciones concedidas a Crysantem no implican la transferencia de la propiedad de las cuentas del Cliente. El Cliente mantiene la titularidad y responsabilidad sobre sus propias cuentas y servicios de terceros.</p>
+                    
+                    <h3>2.2. Contratación de los servicios</h3>
+                    <p>Los servicios de Crysantem podrán contratarse a través de los canales comerciales habilitados por la Empresa, incluyendo el sitio web oficial y medios de contacto como correo electrónico o WhatsApp.</p>
+                    <p>La contratación se considerará realizada cuando Crysantem y el Cliente hayan acordado el servicio, sus características y las condiciones económicas correspondientes.</p>
+                    <p>El Agente IA utilizado en el sitio web de Crysantem tiene como finalidad principal proporcionar información y responder consultas relacionadas con los servicios ofrecidos por la Empresa. Dicho agente no tiene como finalidad crear, configurar ni desarrollar automáticamente nuevos Agentes IA para los Clientes.</p>
+                    
+                    <h3>2.3. Personalización del servicio</h3>
+                    <p>Los Agentes IA ofrecidos por Crysantem son configurados de manera personalizada de acuerdo con las especificaciones, necesidades y características del Cliente.</p>
+                    <p>La personalización puede incluir, entre otros elementos:</p>
+                    <ul>
+                        <li>instrucciones y prompts específicos;</li>
+                        <li>tono y estilo de comunicación;</li>
+                        <li>información proporcionada por el Cliente;</li>
+                        <li>documentos, archivos e imágenes destinados a proporcionar contexto al agente;</li>
+                        <li>funciones y automatizaciones acordadas;</li>
+                        <li>apariencia visual del chatbot;</li>
+                        <li>colores, nombre de marca y otros elementos de identidad visual;</li>
+                        <li>sitio web, interfaz o canal mediante el cual funcionará el Agente IA.</li>
+                    </ul>
+                    
+                    <h3>2.4. Responsabilidades del Cliente</h3>
+                    <p>Para permitir el correcto funcionamiento del servicio, el Cliente será responsable de:</p>
+                    <ul>
+                        <li>proporcionar información, archivos, documentos, imágenes e instrucciones necesarias para la configuración del Agente IA;</li>
+                        <li>proporcionar información suficientemente precisa y actualizada sobre sus productos, servicios, horarios, precios, políticas y demás contenidos que el agente deba comunicar;</li>
+                        <li>otorgar las autorizaciones necesarias para las integraciones que formen parte del servicio contratado;</li>
+                        <li>mantener activas y en condiciones de funcionamiento las cuentas y servicios de terceros necesarios para las integraciones;</li>
+                        <li>verificar que posee los derechos o autorizaciones necesarios para proporcionar a Crysantem los contenidos utilizados en el Agente IA;</li>
+                        <li>utilizar el servicio de conformidad con la legislación aplicable y estos Términos;</li>
+                        <li>abonar las cuotas correspondientes dentro de los plazos establecidos;</li>
+                        <li>informar a Crysantem de cualquier modificación relevante en la información o configuración que pueda afectar al funcionamiento del Agente IA.</li>
+                    </ul>
+                    
+                    <h3>2.5. Suscripción y continuidad del servicio</h3>
+                    <p>Cuando el servicio contratado incluya una cuota mensual, dicha cuota será necesaria para mantener activo y operativo el Agente IA y las funcionalidades asociadas.</p>
+                    <p>En caso de que una cuota no sea abonada dentro del período correspondiente, Crysantem podrá suspender o bloquear el funcionamiento del Agente IA y de las funcionalidades asociadas hasta que se regularice el pago.</p>
+                    <p>La suspensión por falta de pago no elimina las obligaciones económicas ya generadas por el Cliente.</p>
+                    
+                    <h3>2.6. Limitaciones técnicas</h3>
+                    <p>Las funcionalidades de cada Agente IA estarán sujetas a las capacidades técnicas disponibles para Crysantem al momento de la contratación y a las características de los servicios, APIs, proveedores de infraestructura y tecnologías de terceros utilizadas.</p>
+                    <p>Crysantem no estará obligada a proporcionar funcionalidades que excedan las capacidades técnicas acordadas o que no hayan sido incluidas en el servicio contratado.</p>
+                    
+                    <h3>2.7. Mantenimiento y modificaciones</h3>
+                    <p>El servicio contratado se mantendrá, en términos generales, bajo las características acordadas durante la contratación y continuará disponible mientras la suscripción permanezca activa y se cumplan las condiciones correspondientes.</p>
+                    <p>Las modificaciones que impliquen cambios sustanciales en la estructura, funcionalidades, lógica, integraciones, diseño, arquitectura o alcance del Agente IA podrán considerarse trabajos adicionales y estarán sujetas a un presupuesto o cargo adicional determinado por Crysantem según la complejidad de la solicitud.</p>
+                    
+                    <h2 class="terms-title">3. Integraciones, OAuth 2.0 y servicios de terceros</h2>
+                    
+                    <h3>3.1. Integraciones con servicios de terceros</h3>
+                    <p>Determinadas funcionalidades proporcionadas por Crysantem requieren la conexión del Agente IA con servicios, plataformas o aplicaciones externas. Estas conexiones permiten que el agente ejecute las funciones específicamente contratadas por el Cliente.</p>
+                    <p>Entre los servicios de terceros que pueden integrarse con Crysantem se encuentran servicios de Google Workspace, incluyendo Google Gmail, Google Drive y Google Calendar.</p>
+                    
+                    <h3>3.2. Autorización mediante OAuth 2.0</h3>
+                    <p>Cuando una integración requiera acceso a una cuenta del Cliente, Crysantem utilizará mecanismos de autorización proporcionados por el servicio correspondiente, incluyendo OAuth 2.0 cuando sea aplicable.</p>
+                    <p>Mediante OAuth 2.0, el Cliente podrá autorizar expresamente a Crysantem a acceder a determinadas funciones o información de su cuenta sin proporcionar a Crysantem su contraseña.</p>
+                    
+                    <h3>3.3. Uso de Google APIs</h3>
+                    <p>Cuando el Cliente autorice una integración con servicios de Google, Crysantem podrá utilizar las APIs correspondientes para proporcionar las funcionalidades contratadas.</p>
+                    <p>Dependiendo del servicio y de los permisos autorizados, esto puede incluir:</p>
+                    <ul>
+                        <li><strong>Gmail:</strong> acceso a funciones relacionadas con el correo electrónico, incluyendo el envío de mensajes y, cuando resulte necesario y haya sido expresamente autorizado, otras operaciones permitidas por los permisos concedidos.</li>
+                        <li><strong>Google Drive:</strong> acceso a archivos y documentos necesarios para proporcionar funcionalidades acordadas, incluyendo la consulta, lectura, organización o manipulación de archivos cuando dichas operaciones formen parte del servicio contratado.</li>
+                        <li><strong>Google Calendar:</strong> consulta y gestión de eventos de calendario cuando dicha funcionalidad forme parte del Agente IA contratado, incluyendo la creación, modificación o consulta de eventos según las funciones acordadas con el Cliente.</li>
+                        <li><strong>Google Identity Services:</strong> utilización de información básica de identificación de la cuenta, como nombre, dirección de correo electrónico e identificadores asociados, cuando resulte necesario para identificar y gestionar la cuenta utilizada para la integración.</li>
+                    </ul>
+                    
+                    <h3>3.4. Finalidad del acceso</h3>
+                    <p>Los permisos concedidos mediante OAuth 2.0 y las correspondientes APIs serán utilizados para proporcionar las funcionalidades contratadas por el Cliente.</p>
+                    <p>Crysantem no solicitará acceso a una cuenta de terceros con una finalidad distinta de la prestación de las funcionalidades correspondientes al servicio contratado.</p>
+                    
+                    <h3>3.5. Alcance de las autorizaciones</h3>
+                    <p>El Cliente conserva el control sobre las cuentas conectadas y las autorizaciones otorgadas a Crysantem.</p>
+                    <p>La autorización de una integración no supone que Crysantem adquiera la propiedad de la cuenta, archivos, correos electrónicos, eventos, documentos u otro contenido perteneciente al Cliente.</p>
+                    
+                    <h3>3.6. Revocación de permisos</h3>
+                    <p>El Cliente podrá revocar en cualquier momento las autorizaciones concedidas a Crysantem mediante las herramientas de administración de permisos proporcionadas por el servicio de terceros correspondiente.</p>
+                    <p>La revocación de una autorización puede provocar que determinadas funcionalidades del Agente IA dejen de funcionar, total o parcialmente, cuando dependan de dicha integración.</p>
+                    
+                    <h3>3.7. Credenciales y seguridad de las integraciones</h3>
+                    <p>Crysantem no solicitará al Cliente que proporcione directamente su contraseña de Google para establecer una integración mediante OAuth 2.0.</p>
+                    <p>Las autorizaciones deberán realizarse mediante los mecanismos oficiales de autorización proporcionados por el servicio correspondiente, cuando estos se encuentren disponibles.</p>
+                    
+                    <h3>3.8. Servicios y APIs de terceros</h3>
+                    <p>Crysantem depende, en determinadas funcionalidades, de servicios y APIs proporcionados por terceros. Por este motivo, Crysantem no puede garantizar la disponibilidad permanente de una integración externa.</p>
+                    <p>Cambios realizados por un proveedor externo, incluyendo modificaciones de APIs, scopes, límites de uso, políticas, requisitos de seguridad, interrupciones, suspensión de cuentas o discontinuación de funcionalidades, pueden afectar el funcionamiento del Agente IA.</p>
+                    
+                    <h3>3.9. Tratamiento de datos procedentes de integraciones</h3>
+                    <p>El tratamiento de los datos personales y de la información obtenida mediante las integraciones se encuentra regulado específicamente por la Política de Privacidad de Crysantem.</p>
+                    <p>Dicha Política de Privacidad describe las categorías de información que pueden ser obtenidas mediante las integraciones, las finalidades de su tratamiento, las circunstancias en las que pueden ser almacenadas o compartidas, las medidas aplicables a su protección y los mecanismos disponibles para solicitar su eliminación, cuando corresponda.</p>
+                    
+                    <h3>3.10. Cumplimiento de las políticas de los proveedores</h3>
+                    <p>El uso de integraciones con Google y otros servicios de terceros deberá realizarse de conformidad con las condiciones y políticas aplicables de dichos proveedores.</p>
+                    <p>El Cliente se compromete a no utilizar los Agentes IA de Crysantem para realizar acciones que infrinjan las políticas de los servicios conectados.</p>
+                    
+                    <h2 class="terms-title">4. Inteligencia artificial, automatizaciones y uso aceptable</h2>
+                    
+                    <h3>4.1. Naturaleza de los Agentes IA</h3>
+                    <p>Los servicios proporcionados por Crysantem pueden incorporar sistemas de inteligencia artificial destinados a generar respuestas, procesar información y ejecutar determinadas acciones de forma automatizada.</p>
+                    <p>El comportamiento de un Agente IA dependerá de su configuración, de las instrucciones proporcionadas por Crysantem y el Cliente, de la información disponible y de las tecnologías y servicios utilizados para su funcionamiento.</p>
+                    <p>Los Agentes IA están diseñados para ejecutar las funciones acordadas con el Cliente, pero no constituyen un sustituto de la supervisión, criterio o toma de decisiones del Cliente.</p>
+                    
+                    <h3>4.2. Posibilidad de errores</h3>
+                    <p>El Cliente reconoce que los sistemas de inteligencia artificial pueden producir respuestas incompletas, imprecisas, desactualizadas o incorrectas.</p>
+                    <p>Crysantem procurará configurar y mantener los Agentes IA de manera razonable para reducir estos errores, pero no garantiza que todas las respuestas generadas sean exactas en todo momento.</p>
+                    
+                    <h3>4.3. Automatización de acciones</h3>
+                    <p>Dependiendo del servicio contratado, un Agente IA puede estar autorizado para ejecutar determinadas acciones automáticamente, incluyendo responder consultas, gestionar información, enviar comunicaciones o administrar citas.</p>
+                    <p>El Cliente será responsable de proporcionar instrucciones adecuadas y de verificar que las acciones automatizadas configuradas sean apropiadas para su actividad.</p>
+                    
+                    <h3>4.4. Información proporcionada por el Cliente</h3>
+                    <p>El Cliente será responsable de la información, documentos, imágenes, archivos, instrucciones y demás contenidos que proporcione para configurar o alimentar su Agente IA.</p>
+                    <p>El Cliente declara que cuenta con los derechos, permisos o autorizaciones necesarios para proporcionar dichos contenidos y permitir su utilización dentro del servicio.</p>
+                    
+                    <h3>4.5. Responsabilidad sobre las respuestas del Agente</h3>
+                    <p>El Cliente será responsable de determinar si las respuestas y acciones generadas por su Agente IA son adecuadas para su actividad y para el contexto en el que se utilizan.</p>
+                    <p>Cuando el Agente IA sea utilizado para proporcionar información a clientes o usuarios finales, el Cliente deberá procurar que la información utilizada para su configuración sea correcta y se mantenga actualizada.</p>
+                    
+                    <h3>4.6. Uso permitido</h3>
+                    <p>Los servicios de Crysantem deberán utilizarse exclusivamente para fines lícitos y de conformidad con estos Términos, las leyes aplicables y las condiciones de los servicios de terceros utilizados en la prestación del servicio.</p>
+                    <p>El Cliente no podrá utilizar los Agentes IA para:</p>
+                    <ul>
+                        <li>realizar actividades ilícitas o facilitar la comisión de delitos;</li>
+                        <li>intentar obtener acceso no autorizado a sistemas, cuentas, redes o información de terceros;</li>
+                        <li>realizar actividades de fraude, suplantación de identidad o engaño deliberado;</li>
+                        <li>distribuir software malicioso, código dañino u otros mecanismos destinados a comprometer sistemas;</li>
+                        <li>utilizar las integraciones para enviar comunicaciones no autorizadas, spam o mensajes masivos que infrinjan las políticas de los proveedores correspondientes;</li>
+                        <li>abusar de las APIs, límites de uso o mecanismos de autenticación de servicios de terceros;</li>
+                        <li>proporcionar instrucciones destinadas a evadir mecanismos de seguridad o restricciones técnicas;</li>
+                        <li>utilizar el servicio de una forma que pueda afectar deliberadamente su disponibilidad, estabilidad o seguridad;</li>
+                        <li>utilizar información o contenidos de terceros sin contar con las autorizaciones correspondientes;</li>
+                        <li>utilizar el servicio de una forma que infrinja los derechos de otras personas o entidades.</li>
+                    </ul>
+                    
+                    <h3>4.7. Comunicaciones automatizadas</h3>
+                    <p>Cuando un Agente IA esté configurado para enviar correos electrónicos u otras comunicaciones automáticamente, el Cliente será responsable de proporcionar información adecuada sobre los destinatarios, finalidad y contenido de dichas comunicaciones.</p>
+                    
+                    <h3>4.8. Información sensible y usos de alto riesgo</h3>
+                    <p>El Cliente deberá informar a Crysantem cuando pretenda utilizar un Agente IA para funciones que puedan implicar consecuencias especialmente relevantes para las personas.</p>
+                    <p>Los Agentes IA de Crysantem no deberán utilizarse como única base para tomar decisiones que puedan producir consecuencias legales o significativamente perjudiciales para una persona sin una revisión humana adecuada.</p>
+                    
+                    <h2 class="terms-title">5. Precios, pagos, propiedad intelectual y responsabilidad</h2>
+                    
+                    <h3>5.1. Precios y planes</h3>
+                    <p>Los servicios y planes ofrecidos por Crysantem tendrán los precios publicados en el sitio web oficial al momento de la contratación.</p>
+                    <p>Crysantem podrá ofrecer planes personalizados cuando las necesidades del Cliente excedan las características o funcionalidades incluidas en los planes estándar.</p>
+                    
+                    <h3>5.2. Pago inicial</h3>
+                    <p>La contratación de un Agente IA podrá requerir un pago inicial de implementación o adquisición, cuyo importe dependerá del plan o servicio seleccionado.</p>
+                    <p>Este pago podrá comprender, según corresponda, las tareas de configuración, personalización, desarrollo, implementación y puesta en funcionamiento del servicio contratado.</p>
+                    
+                    <h3>5.3. Cuota mensual de mantenimiento</h3>
+                    <p>Los servicios de Crysantem requieren una cuota mensual de mantenimiento mientras el Cliente desee mantener activo y operativo el Agente IA, salvo que el servicio contratado indique expresamente otra modalidad.</p>
+                    <p>La cuota mensual corresponde al mantenimiento y continuidad del servicio y puede comprender, según el plan contratado, los recursos técnicos necesarios para mantener el Agente IA funcionando, su infraestructura, integraciones y demás componentes asociados.</p>
+                    
+                    <h3>5.4. Pagos automáticos</h3>
+                    <p>Los pagos iniciales y recurrentes se realizarán mediante los métodos de pago habilitados por Crysantem.</p>
+                    <p>Cuando el Cliente contrate un servicio con facturación recurrente, autoriza el cobro automático de la cuota mensual correspondiente mediante el método de pago seleccionado durante la contratación.</p>
+                    
+                    <h3>5.5. Falta de pago</h3>
+                    <p>En caso de que un pago recurrente no pueda realizarse, Crysantem podrá notificar al Cliente y otorgar un período razonable para regularizar la situación.</p>
+                    <p>Si el pago continúa pendiente, Crysantem podrá suspender o bloquear el funcionamiento del Agente IA y de las funcionalidades asociadas hasta que la deuda sea regularizada.</p>
+                    
+                    <h3>5.6. Baja del servicio</h3>
+                    <p>El Cliente podrá solicitar la baja de su plan y de la facturación recurrente mediante los mecanismos de cancelación proporcionados por Crysantem.</p>
+                    <p>Una vez procesada la baja, no se realizarán nuevos cargos correspondientes a períodos posteriores, salvo que exista un importe pendiente previamente generado o una condición contractual específica que indique lo contrario.</p>
+                    
+                    <h3>5.7. Reembolsos</h3>
+                    <p>Las condiciones de reembolso, cuando correspondan, dependerán del servicio contratado, del momento de la solicitud y de las condiciones informadas al Cliente durante la contratación.</p>
+                    <p>Salvo que se indique expresamente lo contrario o que la legislación aplicable establezca un derecho de reembolso, el pago inicial correspondiente a trabajos de configuración, desarrollo o personalización ya realizados podrá no ser reembolsable.</p>
+                    
+                    <h3>5.8. Propiedad intelectual de Crysantem</h3>
+                    <p>Salvo acuerdo escrito en contrario, todos los derechos de propiedad intelectual relacionados con el software, código fuente, código ejecutable, sistemas, herramientas, infraestructura, diseños técnicos, metodologías, componentes reutilizables, plantillas, tecnologías, configuraciones internas y demás elementos desarrollados o utilizados por Crysantem para proporcionar sus servicios pertenecen a Crysantem o a sus respectivos titulares.</p>
+                    <p>La contratación de un Agente IA otorga al Cliente un derecho de uso del servicio contratado durante el período en que este permanezca activo y bajo las condiciones establecidas por estos Términos.</p>
+                    
+                    <h3>5.9. Contenido y materiales del Cliente</h3>
+                    <p>El Cliente conserva los derechos que le correspondan sobre la información, documentos, imágenes, archivos, textos, marcas y demás materiales que proporcione a Crysantem para la configuración o funcionamiento de su Agente IA.</p>
+                    <p>El Cliente concede a Crysantem las autorizaciones necesarias para utilizar dichos materiales con la finalidad de desarrollar, configurar, mantener y proporcionar el servicio contratado.</p>
+                    
+                    <h3>5.10. Elementos personalizados</h3>
+                    <p>La personalización de un Agente IA no implica, por sí misma, la transferencia de propiedad intelectual sobre las herramientas, estructuras de software, código, sistemas o componentes técnicos utilizados para realizar dicha personalización.</p>
+                    
+                    <h3>5.11. Limitación de responsabilidad</h3>
+                    <p>Crysantem será responsable por la prestación de los servicios dentro del alcance expresamente contratado y de conformidad con las obligaciones que resulten aplicables.</p>
+                    <p>Sin perjuicio de las responsabilidades que no puedan excluirse o limitarse legalmente, Crysantem no será responsable por daños o interrupciones derivados exclusivamente de:</p>
+                    <ul>
+                        <li>fallos, interrupciones o modificaciones de servicios de terceros;</li>
+                        <li>errores o información incorrecta proporcionada por el Cliente;</li>
+                        <li>configuraciones realizadas o solicitadas por el Cliente;</li>
+                        <li>indisponibilidad de cuentas o servicios externos necesarios para una integración;</li>
+                        <li>interrupciones de infraestructura o servicios tecnológicos ajenos al control razonable de Crysantem;</li>
+                        <li>uso del Agente IA contrario a las instrucciones proporcionadas o a estos Términos;</li>
+                        <li>decisiones tomadas por el Cliente o terceros basándose exclusivamente en respuestas generadas por un sistema de inteligencia artificial;</li>
+                        <li>pérdida de acceso causada por credenciales, permisos o cuentas del Cliente;</li>
+                        <li>modificaciones realizadas por proveedores externos sobre sus APIs, políticas o sistemas.</li>
+                    </ul>
+                    
+                    <h2 class="terms-title">6. Terminación, modificaciones y disposiciones finales</h2>
+                    
+                    <h3>6.1. Terminación por parte del Cliente</h3>
+                    <p>El Cliente podrá solicitar la cancelación de su servicio en cualquier momento mediante los canales habilitados por Crysantem.</p>
+                    <p>La cancelación detendrá la renovación y los futuros cargos recurrentes correspondientes al servicio, una vez que la solicitud haya sido procesada.</p>
+                    <p>La cancelación no exime al Cliente del pago de importes que hayan sido generados con anterioridad a la fecha efectiva de cancelación.</p>
+                    
+                    <h3>6.2. Suspensión o terminación por parte de Crysantem</h3>
+                    <p>Crysantem podrá suspender temporalmente o terminar un servicio cuando resulte necesario debido a:</p>
+                    <ul>
+                        <li>falta de pago de las cuotas correspondientes;</li>
+                        <li>incumplimiento de estos Términos y Condiciones;</li>
+                        <li>utilización del servicio para actividades ilegales, fraudulentas o abusivas;</li>
+                        <li>uso que pueda comprometer la seguridad de Crysantem, de otros Clientes o de terceros;</li>
+                        <li>utilización indebida de integraciones o servicios de terceros;</li>
+                        <li>requerimientos legales o regulatorios;</li>
+                        <li>imposibilidad técnica sobrevenida de continuar proporcionando una funcionalidad esencial del servicio;</li>
+                        <li>cualquier otra circunstancia que haga razonablemente necesario suspender el servicio para proteger su funcionamiento o seguridad.</li>
+                    </ul>
+                    
+                    <h3>6.3. Terminación de integraciones</h3>
+                    <p>La terminación de una integración con un servicio externo, ya sea solicitada por el Cliente, provocada por la revocación de permisos o causada por una modificación del proveedor, puede impedir el funcionamiento de determinadas características del Agente IA.</p>
+                    
+                    <h3>6.4. Efectos de la terminación</h3>
+                    <p>Una vez finalizado el servicio, Crysantem dejará de proporcionar las funcionalidades contratadas asociadas al Agente IA, salvo que exista un acuerdo diferente entre las partes.</p>
+                    <p>La terminación del servicio no implica la transferencia al Cliente de la propiedad del software, código fuente, infraestructura o tecnologías utilizadas por Crysantem.</p>
+                    
+                    <h3>6.5. Modificaciones de los servicios</h3>
+                    <p>Crysantem podrá actualizar, modificar o mejorar sus servicios con el objetivo de mantener su funcionamiento, seguridad y compatibilidad con las tecnologías utilizadas.</p>
+                    <p>Las modificaciones menores que no alteren sustancialmente la finalidad del servicio podrán implementarse sin necesidad de una autorización adicional del Cliente.</p>
+                    
+                    <h3>6.6. Modificaciones de estos Términos</h3>
+                    <p>Crysantem podrá modificar estos Términos y Condiciones cuando resulte necesario para reflejar cambios en sus servicios, procesos, tecnologías, requisitos legales o condiciones comerciales.</p>
+                    <p>La versión actualizada será publicada en el sitio web de Crysantem e incluirá su correspondiente fecha de actualización.</p>
+                    
+                    <h3>6.7. Política de Privacidad</h3>
+                    <p>El tratamiento de datos personales y de información obtenida mediante las funcionalidades del servicio se encuentra regulado por la Política de Privacidad de Crysantem.</p>
+                    <p>La Política de Privacidad forma parte del marco documental del servicio y deberá ser consultada conjuntamente con estos Términos.</p>
+                    
+                    <h3>6.8. Servicios de terceros</h3>
+                    <p>Crysantem puede depender de proveedores tecnológicos, APIs, servicios de infraestructura y plataformas externas para proporcionar determinadas funcionalidades.</p>
+                    <p>Los servicios de terceros pueden estar sujetos a sus propios términos, políticas y condiciones.</p>
+                    
+                    <h3>6.9. Cesión</h3>
+                    <p>El Cliente no podrá transferir sus derechos u obligaciones derivados de estos Términos a otra persona o entidad sin autorización previa de Crysantem, salvo cuando dicha transferencia esté permitida por la legislación aplicable.</p>
+                    
+                    <h3>6.10. Integridad del acuerdo</h3>
+                    <p>Estos Términos, junto con la Política de Privacidad y las condiciones particulares que hayan sido expresamente acordadas para un servicio personalizado, constituyen el acuerdo aplicable a la utilización de los servicios de Crysantem.</p>
+                    
+                    <h3>6.11. Separabilidad</h3>
+                    <p>Si alguna disposición de estos Términos fuese considerada inválida, ilegal o inaplicable por una autoridad competente, dicha disposición se interpretará o modificará en la medida necesaria para cumplir con la legislación aplicable, sin afectar la validez del resto de las disposiciones.</p>
+                    
+                    <h3>6.12. Legislación aplicable</h3>
+                    <p>Estos Términos se regirán e interpretarán de conformidad con las leyes aplicables al servicio y a la relación entre Crysantem y el Cliente.</p>
+                    <p>Cuando resulte aplicable la legislación argentina, Crysantem respetará las normas imperativas correspondientes, incluyendo aquellas relativas a protección de los consumidores, contratación a distancia, protección de datos personales y demás disposiciones aplicables.</p>
+                    
+                    <h3>6.13. Contacto y comunicaciones</h3>
+                    <p>Las consultas, solicitudes de cancelación, cuestiones relacionadas con el servicio y demás comunicaciones dirigidas a Crysantem podrán realizarse mediante los canales oficiales de contacto publicados en su sitio web.</p>
+                    <p>Crysantem podrá utilizar el correo electrónico proporcionado por el Cliente para enviar comunicaciones relacionadas con el funcionamiento del servicio, pagos, modificaciones importantes, seguridad, mantenimiento y otros asuntos directamente relacionados con la prestación contratada.</p>
+                    
+                    <h3>6.14. Entrada en vigor</h3>
+                    <p>Estos Términos y Condiciones entrarán en vigor a partir de la fecha indicada al comienzo del documento y permanecerán vigentes mientras el Cliente utilice los servicios de Crysantem.</p>
+                    
+                    <div class="terms-acceptance">
+                        <label>
+                            <input type="checkbox" id="termsAccept" onchange="toggleTermsAccept()">
+                            He leído y acepto los términos y condiciones
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeTerms()">Cerrar</button>
+                <button class="btn btn-primary" id="termsAcceptBtn" onclick="acceptTerms()" disabled>Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Política de Privacidad de Crysantem</h2>
+                <button class="modal-close" onclick="closePrivacy()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-content">
+                    <h3>1. Recopilación de Información</h3>
+                    <p>Crysantem recopila información necesaria para proporcionar sus servicios, incluyendo datos de contacto, información de autenticación y datos de uso del servicio.</p>
+                    
+                    <h3>2. Uso de la Información</h3>
+                    <p>La información recopilada se utiliza para:</p>
+                    <ul>
+                        <li>Proporcionar y mejorar los servicios</li>
+                        <li>Comunicarse con los usuarios</li>
+                        <li>Realizar seguimiento del uso</li>
+                        <li>Garantizar la seguridad del sistema</li>
+                    </ul>
+                    
+                    <h3>3. Protección de Datos</h3>
+                    <p>Crysantem implementa medidas técnicas y organizativas para proteger la información personal contra acceso no autorizado, alteración o destrucción.</p>
+                    
+                    <h3>4. Compartición de Información</h3>
+                    <p>No compartimos información personal con terceros excepto cuando sea necesario para la prestación del servicio o cuando sea requerido por ley.</p>
+                    
+                    <h3>5. Derechos del Usuario</h3>
+                    <p>Los usuarios tienen derecho a acceder, corregir o eliminar su información personal. Para ejercer estos derechos, contacta a Crysantem.</p>
+                    
+                    <h3>6. Cookies y Tecnologías Similares</h3>
+                    <p>Crysantem utiliza cookies y tecnologías similares para mejorar la experiencia del usuario y analizar el uso del servicio.</p>
+                    
+                    <h3>7. Cambios en la Política</h3>
+                    <p>Crysantem puede actualizar esta política de privacidad. Los cambios serán notificados a los usuarios cuando sea significativo.</p>
+                    
+                    <div class="terms-acceptance">
+                        <label>
+                            <input type="checkbox" id="privacyAccept" onchange="togglePrivacyAccept()">
+                            He leído y acepto la política de privacidad
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closePrivacy()">Cerrar</button>
+                <button class="btn btn-primary" id="privacyAcceptBtn" onclick="acceptPrivacy()" disabled>Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Texto Bonito Modal -->
+    <div id="textoBonitoModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Texto Bonito</h2>
+                <button class="modal-close" onclick="closeModal('textoBonitoModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="texto-bonito-demo">
+                    <p>Ten texto bonito con un markdown más amplio, el cual añade (además de listas y negritas):</p>
+                    <ul>
+                        <li><strong>Subrayados</strong></li>
+                        <li><span style="background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 8px 12px; color: #00ff88;">Cajas coloridas</span> (texto con color rodeado por una caja de color)</li>
+                        <li><a href="#" style="color: #48cae4; text-decoration: underline;">Links con recuadros estéticos</a></li>
+                        <li><span style="background: rgba(0, 255, 136, 0.2); padding: 2px 6px; border-radius: 4px;">Texto resaltado en colores</span></li>
+                        <li>Letras con <em style="color: #9d4edd;">"Acento"</em> específico</li>
+                        <li><span style="background: rgba(167, 176, 170, 0.2); padding: 10px 15px; border-left: 4px solid #a7b0aa; display: block; margin: 10px 0;">Texto "Citado" (Cuadro gris con "", tipo citando texto)</span></li>
+                        <li><strong>Títulos y Subtítulos</strong> con diferentes estilos y tamaños</li>
+                        <li>Botones de Gmail y WhatsApp personalizados para acceso directo (La IA envía botones)</li>
+                    </ul>
+                    
+                    <div class="demo-section">
+                        <h3>Demostraciones con "Hola, somos Crysantem IA":</h3>
+                        
+                        <div class="demo-item">
+                            <h4>Subrayado:</h4>
+                            <p><u>Hola, somos Crysantem IA</u></p>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Títulos y Subtítulos:</h4>
+                            <h2 style="color: #8b7355; font-size: 24px; margin-bottom: 5px;">Hola, somos Crysantem IA</h2>
+                            <h3 style="color: #6b5344; font-size: 18px; margin: 0;">Texto Bonito</h3>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Texto de color:</h4>
+                            <p style="color: #00ff88;">Hola, somos Crysantem IA</p>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Caja con recuadro:</h4>
+                            <span style="background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 8px 12px; color: #00ff88;">Hola, somos Crysantem IA</span>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Link estético:</h4>
+                            <a href="#" style="color: #48cae4; text-decoration: underline; border: 1px solid #48cae4; padding: 4px 8px; border-radius: 4px;">Hola, somos Crysantem IA</a>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Texto resaltado:</h4>
+                            <p><span style="background: rgba(0, 255, 136, 0.2); padding: 2px 6px; border-radius: 4px;">Hola, somos Crysantem IA</span></p>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Acento específico:</h4>
+                            <p>Hola, somos <em style="color: #9d4edd; font-style: italic;">Crysantem IA</em></p>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Texto citado:</h4>
+                            <span style="background: rgba(167, 176, 170, 0.2); padding: 10px 15px; border-left: 4px solid #a7b0aa; display: block; margin: 10px 0;">"Hola, somos Crysantem IA"</span>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Botones de acceso directo:</h4>
+                            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                <button style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                                    WhatsApp
+                                </button>
+                                <button style="background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                                    Gmail
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-section">
+                        <h3>Beneficios:</h3>
+                        <p>Esto le da vida al texto y da una retención psicológica visual enganchando al lector, además la IA puede dar acceso directo al WhatsApp o Gmail lo que es muy útil si estás pagando un plan de coste bajo.</p>
+                    </div>
+                    
+                    <div class="cost-section">
+                        <h3>Costo: $7 USD</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('textoBonitoModal')">Cerrar</button>
+                <button class="btn btn-primary">Agregar al plan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graficos Pro Modal -->
+    <div id="graficosProModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Graficos Pro</h2>
+                <button class="modal-close" onclick="closeModal('graficosProModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="graficos-pro-demo">
+                    <p>Muestra gráficos a tus clientes para mostrarles tu trabajo en situaciones específicas. La IA podrá generar gráficos.</p>
+                    
+                    <div class="demo-section">
+                        <h3>Gráficos disponibles:</h3>
+                        
+                        <div class="demo-item">
+                            <h4>Gráfico de Barras:</h4>
+                            <canvas id="barChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Gráfico de Líneas:</h4>
+                            <canvas id="lineChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Gráfico Circular:</h4>
+                            <canvas id="pieChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="demo-item">
+                            <h4>Gráfico de Área:</h4>
+                            <canvas id="areaChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-section">
+                        <h3>Beneficios:</h3>
+                        <p>Visualiza datos de manera profesional y atractiva para tus clientes, permitiendo que la IA presente información compleja de forma clara y comprensible.</p>
+                    </div>
+                    
+                    <div class="cost-section">
+                        <h3>Costo: $10 USD</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('graficosProModal')">Cerrar</button>
+                <button class="btn btn-primary">Agregar al plan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/config.js?v=prod"></script>
+    <script src="/js/auth.js?v=prod"></script>
+    <script src="/js/main.js?v=prod"></script>
+    <script src="/js/markdown-enhanced.js?v=prod"></script>
+    <script src="/js/chatbot.js?v=prod"></script>
+    <script src="/js/animations.js?v=prod"></script>
+    <script src="/js/terms.js?v=prod"></script>
+    <script src="/js/integrations.js?v=prod"></script>
+    <script src="/js/compras-adicionales.js?v=prod"></script>
+</body>
+</html>
