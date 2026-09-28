@@ -7,7 +7,8 @@
 // Cambia esta URL cuando despliegues el backend en un servidor separado
 // Desarrollo local: http://localhost:3000
 // Producción: https://tu-backend-api.com (o la URL de tu VPS/servidor)
-const BACKEND_API_URL = 'http://localhost:3000';
+// Si no hay backend disponible, dejar vacío para usar modo demo
+const BACKEND_API_URL = '';
 
 // === APP BASE URL ===
 // Normalmente es el mismo origen del frontend, pero puede ser diferente si usas dominios separados

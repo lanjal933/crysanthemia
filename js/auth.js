@@ -16,6 +16,12 @@ let SUPABASE_ANON_KEY = null;
 // === LOAD CONFIG FROM BACKEND ===
 async function loadConfigFromBackend() {
     try {
+        // Solo intentar cargar si hay una URL de backend configurada
+        if (!API_BASE_URL || API_BASE_URL === '') {
+            console.log('No backend URL configured, using local Supabase config');
+            return;
+        }
+        
         const response = await fetch(`${API_BASE_URL}/api/config`);
         if (response.ok) {
             const config = await response.json();
@@ -31,7 +37,7 @@ async function loadConfigFromBackend() {
 }
 
 console.log('=== AUTH DEBUG INFO ===');
-console.log('API Base URL:', API_BASE_URL);
+console.log('API Base URL:', API_BASE_URL || 'No backend configured');
 console.log('App Base URL:', (window.CrConfig && window.CrConfig.APP_BASE_URL) || window.location.origin);
 console.log('Current window.location.href:', window.location.href);
 console.log('Current window.location.origin:', window.location.origin);

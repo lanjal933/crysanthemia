@@ -9,7 +9,7 @@ const DEVELOPER_EMAIL = "benjamin@crysantem.com"; // Email del desarrollador par
 
 // === MODO DE OPERACIÓN ===
 // En desarrollo o cuando el backend no está disponible, usar modo demo
-const DEMO_MODE = true; // Cambiar a false cuando el backend esté completo
+const DEMO_MODE = true; // Siempre true cuando no hay backend disponible
 
 // === SESSION MANAGEMENT ===
 let sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
@@ -427,7 +427,16 @@ async function sendMessage() {
             return;
         }
         
-        const statusResponse = await fetch(`${(window.CrConfig && window.CrConfig.BACKEND_API_URL) || window.location.origin}/api/auth/google/status/${userId}`);
+        const backendUrl = window.CrConfig && window.CrConfig.BACKEND_API_URL;
+        if (!backendUrl || backendUrl === '') {
+            console.log('No backend configured, skipping Google status check');
+            addMessage('⚠️ Para usar el agente, primero debes conectar tu cuenta de Gmail.');
+            chatbotInput.disabled = false;
+            chatbotSend.disabled = false;
+            return;
+        }
+        
+        const statusResponse = await fetch(`${backendUrl}/api/auth/google/status/${userId}`);
         const statusData = await statusResponse.json();
         
         console.log('=== GOOGLE STATUS CHECK ===');
@@ -510,6 +519,18 @@ async function sendMessage() {
     
     // Send to webhook
     try {
+        const backendUrl = window.CrConfig && window.CrConfig.BACKEND_API_URL;
+        if (!backendUrl || backendUrl === '') {
+            console.log('No backend configured, skipping webhook call');
+            // Si no hay backend, usar modo demo
+            const response = getDemoResponse(message);
+            addMessage(response);
+            chatbotInput.disabled = false;
+            chatbotSend.disabled = false;
+            chatbotInput.focus();
+            return;
+        }
+        
         const response = await fetch(CHATBOT_WEBHOOK_URL, {
             method: 'POST',
             headers: {
